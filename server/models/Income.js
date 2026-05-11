@@ -1,7 +1,7 @@
 import { Schema, model } from "mongoose";
 import mongoose from "mongoose";
 
-const IncomeSchema = new Schema({
+const IncomeSchema = new mongoose.Schema({
     description: {
         type: String,
         required: true
@@ -37,6 +37,6 @@ const IncomeSchema = new Schema({
 }
 )
 
-const Income = model("Income", IncomeSchema);
+const Income = mongoose.models.Income || mongoose.model("Income", IncomeSchema);
 
 export default Income;
