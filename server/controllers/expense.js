@@ -1,8 +1,8 @@
-import Income from "../models/income.js";
+import Expense from "../models/Expense.js";
 import getDateRange from "../utils/dateFilter.js";
 import XLSX from "xlsx";
 
-const postIncome = async (req, res) => {
+const postExpense = async (req, res) => {
     const userId = req.user.id;
     const { description, amount, category, date } = req.body;
 
@@ -14,7 +14,7 @@ const postIncome = async (req, res) => {
             })
         }
 
-        const newIncome = new Income({
+        const newExpense = new Expense({
             description,
             amount,
             category,
@@ -22,148 +22,148 @@ const postIncome = async (req, res) => {
             userId
         });
 
-        await newIncome.save();
+        await newExpense.save();
 
         return res.json({
             success: true,
-            message: "Income added successfully"
+            message: "Expense added successfully"
         })
     } catch (error) {
         console.log(error);
         return res.json({
             success: false,
-            message: `Error adding income: ${error.message}`
+            message: `Error adding expense: ${error.message}`
         })
     }
 }
 
-const getAllIncome = async (req, res) => {
+const getAllExpense = async (req, res) => {
     const userId = req.user.id;
 
     try {
-        const incomes = await Income.find({ userId }).sort({ date: -1 });
+        const expense = await Expense.find({ userId }).sort({ date: -1 });
         return res.json({
             success: true,
-            message: "Incomes fetched successfully",
-            data: incomes
+            message: "Expense fetched successfully",
+            data: expense
         })
     } catch (error) {
         console.log(error);
         return res.json({
             success: false,
-            message: `Error fetching incomes: ${error.message}`
+            message: `Error fetching expenses: ${error.message}`
         })
     }
 }
 
-const updatedIncome = async (req, res) => {
+const updatedExpense = async (req, res) => {
     const { id } = req.params;
     const userId = req.user.id;
     const { description, amount } = req.body;
 
     try {
-        const updateIncome = await Income.findOneAndUpdate(
+        const updateExpense = await Expense.findOneAndUpdate(
             { _id: id, userId },
             { description, amount },
             { returnDocument: 'after' }
         );
 
-        if (!updateIncome) {
+        if (!updateExpense) {
             return res.json({
                 success: false,
-                message: "Income not found"
+                message: "Expense not found"
             })
         }
 
         return res.json({
             success: true,
-            message: "Income updated successfully",
-            data: updateIncome
+            message: "Expense updated successfully",
+            data: updateExpense
         });
 
     } catch (error) {
         console.log(error);
         return res.json({
             success: false,
-            message: `Error updating income: ${error.message}`
+            message: `Error updating expense: ${error.message}`
         })
     }
 }
 
-const deletedIncome = async (req, res) => {
+const deleteExpense = async (req, res) => {
     try {
-        const income = await Income.findOneAndDelete({ _id: req.params.id });
+        const expense = await Expense.findOneAndDelete({ _id: req.params.id });
 
-        if (!income) {
+        if (!expense) {
             return res.json({
                 success: false,
-                message: "Income not found"
+                message: "Expense not found"
             })
         }
 
         return res.json({
             success: true,
-            message: "Income deleted successfully"
+            message: "Expense deleted successfully"
         })
     } catch (error) {
         console.log(error);
         return res.json({
             success: false,
-            message: `Error deleting income: ${error.message}`
+            message: `Error deleting expense: ${error.message}`
         })
     }
 }
 
-const downloadIncomeExcel = async (req, res) => {
+const downloadExpenseExcel = async (req, res) => {
     const userId = req.user.id;
 
     try {
-        const incomes = await Income.find({ userId }).sort({ date: -1 });
-        const plainData = incomes.map((inc) => ({
-            Description: inc.description,
-            Amount: inc.amount,
-            Category: inc.category,
-            Date: new Date(inc.date).toLocaleDateString()
+        const expenses = await Expense.find({ userId }).sort({ date: -1 });
+        const plainData = expenses.map((exp) => ({
+            Description: exp.description,
+            Amount: exp.amount,
+            Category: exp.category,
+            Date: new Date(exp.date).toLocaleDateString()
         }));
 
         const workSheet = XLSX.utils.json_to_sheet(plainData);
         const workBook = XLSX.utils.book_new();
-        XLSX.utils.book_append_sheet(workBook, workSheet, "Incomes");
-        XLSX.writeFile(workBook, "income_details.xlsx");
-        res.download("income_details.xlsx");
+        XLSX.utils.book_append_sheet(workBook, workSheet, "Expenses");
+        XLSX.writeFile(workBook, "expense_details.xlsx");
+        res.download("expense_details.xlsx");
     }
     catch (error) {
         console.log(error);
         return res.json({
             success: false,
-            message: `Error downloading income data: ${error.message}`
+            message: `Error downloading expense data: ${error.message}`
         })
     }
 }
 
-const getIncomeOverView = async (req, res) => {
+const getExpenseOverview = async (req, res) => {
     try {
         const userId = req.user.id;
         const { range = "monthly" } = req.query;
         const { start, end } = getDateRange(range);
 
-        const incomes = await Income.find({
+        const expenses = await Expense.find({
             userId,
             date: { $gte: start, $lte: end },
         }).sort({ date: -1 });
 
-        const totalIncome = incomes.reduce((acc, cur) => acc + cur.amount, 0);
-        const averageIncome = incomes.length > 0 ? totalIncome / incomes.length : 0;
-        const numberOfTransactions = incomes.length;
+        const totalExpense = expenses.reduce((acc, cur) => acc + cur.amount, 0);
+        const averageExpense = expenses.length > 0 ? totalExpense / expenses.length : 0;
+        const numberOfTransactions = expenses.length;
 
-        const recentTransactions = incomes.slice(0, 9);
+        const recentTransactions = expenses.slice(0, 5);
 
         return res.json({
             success: true,
-            message: "Income overview fetched successfully",
+            message: "Expense overview fetched successfully",
             data: {
-                totalIncome,
-                averageIncome,
+                totalExpense,
+                averageExpense,
                 numberOfTransactions,
                 recentTransactions,
                 range
@@ -178,4 +178,4 @@ const getIncomeOverView = async (req, res) => {
     }
 }
 
-export { postIncome, getAllIncome, updatedIncome, deletedIncome, downloadIncomeExcel, getIncomeOverView };
+export { postExpense, getAllExpense, updatedExpense, deleteExpense, downloadExpenseExcel, getExpenseOverview };

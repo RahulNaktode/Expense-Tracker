@@ -4,8 +4,9 @@ import dotenv from 'dotenv';
 import connentDB from './db.js';
 import { checkJWT } from './middlewars/jwt.js';
 import { getHome, getHealth } from './controllers/health.js';
-import { postSignup, postLogin, putUpdatedProfile, updatePassword } from './controllers/auth.js';
-import { postIncome, getAllIncome, updatedIncome, deletedIncome, downloadIncomeExcel, getIncomeOverView  } from './controllers/income.js';
+import userRouter from './routes/user.js';
+import expenseRouter from './routes/expense.js';
+import incomeRouter from './routes/income.js';
 
 dotenv.config();
 
@@ -20,20 +21,9 @@ const PORT = process.env.PORT || 8000;
 app.get("/", getHome);
 app.get("/health", getHealth);
 
-app.post("/signup", postSignup);
-app.post("/login", postLogin);
-app.put("/profile", checkJWT, putUpdatedProfile);
-app.put("/password", checkJWT, updatePassword);
-
-
-app.post("/income", checkJWT, postIncome);
-app.get("/income", checkJWT, getAllIncome);
-
-app.put("/income/:id", checkJWT, updatedIncome);
-app.get("/income/excel", checkJWT, downloadIncomeExcel);
-
-app.delete("/income/:id", checkJWT, deletedIncome);
-app.get("/income/overview", checkJWT, getIncomeOverView);
+app.use("/user", userRouter);
+app.use("/income", incomeRouter);
+app.use("/expense", expenseRouter);
 
 
 app.listen(PORT, (req, res) => {
