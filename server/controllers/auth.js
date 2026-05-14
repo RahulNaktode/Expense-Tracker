@@ -123,6 +123,29 @@ const postLogin = async (req, res) => {
 
 }
 
+const getCurrentUser = async (req, res) => {
+    try{
+        const user = await User.findById(req.user.id).select("name email");
+
+        if(!user){
+            return res.json({
+                success: false,
+                message: "User not found"
+            })
+        }
+        res.json({
+            success: true,
+            data: user
+        })
+    }catch(error){
+         return res.json({
+            success: false,
+            message: `Error: ${error.message}`,
+            data: null
+        })
+    }
+}
+
 const putUpdatedProfile = async (req, res) => {
     try {
         const userId = req.user?.id;
@@ -208,4 +231,4 @@ const updatePassword = async (req, res) => {
         }
 }
 
-export { postSignup, postLogin, putUpdatedProfile, updatePassword };
+export { postSignup, postLogin, getCurrentUser, putUpdatedProfile, updatePassword };
