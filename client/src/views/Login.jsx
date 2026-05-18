@@ -1,12 +1,11 @@
 import { useState } from "react"
-import { useNavigate } from "react-router"
+import { useNavigate, Link } from "react-router"
 import { loginStyles } from "../assets/dummyStyles.js"
 import { User, Mail, Lock, Eye, EyeOff } from "lucide-react"
 import axios from "axios"
 import toast, { Toaster } from "react-hot-toast"
-import { Link } from "react-router"
 
-function Login() {
+function Login({ onLogin }) {
     const [userLogin, setUserLogin] = useState({
         email: "",
         password: ""
@@ -28,19 +27,27 @@ function Login() {
                 toast.success(response.data.message || "Login Successful!", { id: "loginSuccess" });
                 
                 const { jwtToken, data } = response.data;
-                localStorage.setItem("userJwtToken", jwtToken);
-                localStorage.setItem("userData", JSON.stringify(data));
 
                 setUserLogin({ email: "", password: "" });
 
-                setTimeout(() => {
+                if (onLogin) {
+                    onLogin(data, jwtToken, rememberMe);
+                } else {
+                    if (rememberMe) {
+                        localStorage.setItem("token", jwtToken);
+                        localStorage.setItem("user", JSON.stringify(data));
+                    } else {
+                        sessionStorage.setItem("token", jwtToken);
+                        sessionStorage.setItem("user", JSON.stringify(data));
+                    }
                     navigate("/");
-                }, 1500);
+                }
             } else {
-                toast.error(response.data.message, { id: "loginError" });
+                toast.error(response.data.message || "Invalid account credentials.", { id: "loginError" });
             }
         } catch (err) {
-            toast.error(err.response?.data?.message, { id: "loginError" });
+            const serverErrorMessage = err.response?.data?.message || "Server connection failed. Try again.";
+            toast.error(serverErrorMessage, { id: "loginError" });
         } finally {
             setIsLoading(false);
         }
@@ -48,7 +55,6 @@ function Login() {
 
     return (
         <div className={loginStyles.pageContainer}>
-
             <div className={loginStyles.cardContainer}>
                 <div className={loginStyles.header}>
                     <div className={loginStyles.avatar}>
@@ -98,6 +104,7 @@ function Login() {
                                     type="button" 
                                     onClick={() => setShowPassword(!showPassword)} 
                                     className={loginStyles.passwordToggle}
+                                    aria-label={showPassword ? "Hide password" : "Show password"}
                                 >
                                     {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                                 </button>
@@ -144,9 +151,9 @@ function Login() {
                     </div>
                 </div>
             </div>
-            <Toaster />
+            <Toaster position="top-center" reverseOrder={false} />
         </div>
     )
 }
 
-export default Login
+export default Login;

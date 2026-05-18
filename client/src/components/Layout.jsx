@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import axios from 'axios'; // FIXED: Added missing axios import
+import axios from 'axios';
 import { styles } from "../assets/dummyStyles.js";
 import Navbar from './Navbar';
 import Sidebar from './Sidebar.jsx';
@@ -259,7 +259,6 @@ function Layout({ onLogout, user }) {
     return (
         <div className={styles.layout.root}>
             <Navbar onLogout={onLogout} user={user} />
-            {/* FIXED: Changed lower-case iscollapsed prop to match standard camelCase */}
             <Sidebar user={user} isCollapsed={sidebarCollapsed} setIsCollapsed={setSidebarCollapsed} />
             
             <div className={styles.layout.mainContainer(sidebarCollapsed)}>
@@ -271,13 +270,11 @@ function Layout({ onLogout, user }) {
                 </div>
 
                 <div className={styles.statCards.grid}>
-                    {/* Total Balance Card */}
                     <div className={styles.statCards.card}>
                         <div className={styles.statCards.cardHeader}>
                             <div>
                                 <h2 className={styles.statCards.cardTitle}>Total Balance</h2>
                                 <p className={styles.statCards.cardValue}>
-                                    {/* FIXED: Corrected spelling from maximumFracationDigits to maximumFractionDigits */}
                                     ${stats.allTimeSavings.toLocaleString("en-US", { maximumFractionDigits: 2 })}
                                 </p>
                             </div>
@@ -292,13 +289,11 @@ function Layout({ onLogout, user }) {
                         </p>
                     </div>
 
-                    {/* Monthly Income Card */}
                     <div className={styles.statCards.card}>
                         <div className={styles.statCards.cardHeader}>
                             <div>
                                 <h2 className={styles.statCards.cardTitle}>Monthly Income</h2>
                                 <p className={styles.statCards.cardValue}>
-                                    {/* FIXED: Corrected spelling to maximumFractionDigits */}
                                     ${stats.last30DaysIncome.toLocaleString("en-US", { maximumFractionDigits: 2 })}
                                 </p>
                             </div>
@@ -311,13 +306,11 @@ function Layout({ onLogout, user }) {
                         </p>
                     </div>
 
-                    {/* Monthly Expense Card */}
                     <div className={styles.statCards.card}>
                         <div className={styles.statCards.cardHeader}>
                             <div>
                                 <h2 className={styles.statCards.cardTitle}>Monthly Expense</h2>
                                 <p className={styles.statCards.cardValue}>
-                                    {/* FIXED: Corrected spelling to maximumFractionDigits */}
                                     ${stats.last30DaysExpenses.toLocaleString("en-US", { maximumFractionDigits: 2 })}
                                 </p>
                             </div>
@@ -333,7 +326,6 @@ function Layout({ onLogout, user }) {
                         </p>
                     </div>
 
-                    {/* Savings Rate Card */}
                     <div className={styles.statCards.card}>
                         <div className={styles.statCards.cardHeader}>
                             <div>
@@ -353,7 +345,6 @@ function Layout({ onLogout, user }) {
                 </div>
 
                 <div className={styles.grid.main}>
-                    {/* Financial Overview Block */}
                     <div className={styles.grid.leftColumn}>
                         <div className={styles.cards.base}>
                             <div className={styles.cards.header}>
@@ -398,7 +389,7 @@ function Layout({ onLogout, user }) {
                                                 </div>
                                                 <div className={styles.transactions.details}>
                                                     <p className={styles.transactions.description}>{description}</p>
-                                                    <p className={styles.description.meta}>
+                                                    <p className={styles.transactions.meta}>
                                                         {new Date(date).toLocaleDateString()}
                                                         <span className='ml-2 capitalize'>({category})</span>
                                                     </p>
