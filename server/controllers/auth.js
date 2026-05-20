@@ -69,58 +69,62 @@ const postLogin = async (req, res) => {
     const { email, password } = req.body;
 
     if (!email) {
-        return res.json({
-            success: false,
-            message: "Email is required"
-        })
+        return res.json({ success: false, message: "Email is required" });
     }
-
     if (!password) {
-        return res.json({
-            success: false,
-            message: "Password is required"
-        })
+        return res.json({ success: false, message: "Password is required" });
     }
 
-    const existingUser = await User.findOne({ email });
+    try {
+        const existingUser = await User.findOne({ email });
 
-    if (!existingUser) {
-        return res.json({
-            success: false,
-            message: "User does not exist with this email",
-            data: null
-        })
-    }
-
-    const isPasswordCorrect = bcrypt.compareSync(password, existingUser.password);
-
-    existingUser.password = undefined;
-
-    const jwtToken = jwt.sign({
-        id: existingUser._id,
-        email: existingUser.email
-    },
-        process.env.JWT_SECRET,
-        {
-            expiresIn: "1d"
+        if (!existingUser) {
+            return res.json({
+                success: false,
+                message: "User does not exist with this email",
+                data: null
+            });
         }
-    );
 
-    if (isPasswordCorrect) {
+        // 2. Run password matching block BEFORE cleaning user object state
+        const isPasswordCorrect = bcrypt.compareSync(password, existingUser.password);
+
+        if (!isPasswordCorrect) {
+            return res.json({
+                success: false,
+                message: "Invalid password",
+                data: null
+            });
+        }
+
+        // Wipe password hash out of response scope safely now
+        existingUser.password = undefined;
+
+        // 3. Only sign token if verification passed entirely
+        const jwtToken = jwt.sign(
+            {
+                id: existingUser._id,
+                email: existingUser.email
+            },
+            process.env.JWT_SECRET || "fallback_secret",
+            {
+                expiresIn: "1d"
+            }
+        );
+
         return res.json({
             success: true,
             message: "User logged in successfully",
             data: existingUser,
             jwtToken: jwtToken
         });
-    } else {
+    } catch (error) {
         return res.json({
             success: false,
-            message: "Invalid password",
+            message: `Login error: ${error.message}`,
             data: null
         });
     }
-
 }
 
 const getCurrentUser = async (req, res) => {

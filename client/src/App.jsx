@@ -81,16 +81,13 @@ function App() {
 
   const updatedUserData = (updatedUser) => {
     setUser(updatedUser);
-
     const localToken = localStorage.getItem("token");
-    const sessionToken = localStorage.getItem("token");
-
     if (localToken) {
-      localStorage.setItem("user", JSON.stringify(updatedUser))
-    } else if (sessionToken) {
-      sessionToken.setItem("user", JSON.stringify(updatedUser));
+      localStorage.setItem("user", JSON.stringify(updatedUser));
+    } else {
+      sessionStorage.setItem("user", JSON.stringify(updatedUser));
     }
-  }
+  };
 
   useEffect(() => {
     (async () => {
@@ -100,7 +97,9 @@ function App() {
         const localToken = localStorage.getItem("token");
         const sessionToken = sessionStorage.getItem("token");
 
-        const storedUser = localUserRaw ? JSON.parse(localUserRaw) : sessionUserRaw ? JSON.parse(sessionToken) : null;
+        const storedUser = localUserRaw
+          ? JSON.parse(localUserRaw)
+          : sessionUserRaw ? JSON.parse(sessionUserRaw) : null;
         const storedToken = localToken || sessionToken || null;
         const tokenFromLocal = !!localToken;
 
@@ -145,8 +144,8 @@ function App() {
     }
   }, [transation]);
 
-  const handleLogin = (userData, remember = false, tokenFromApi = null) => {
-    persistAuth(userData, tokenFromApi, remember);
+  const handleLogin = (userData, jwtToken, remember = false) => {
+    persistAuth(userData, jwtToken, remember);
     navigate("/");
   };
 
