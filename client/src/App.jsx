@@ -6,6 +6,7 @@ import Signup from './views/Signup';
 import Login from './views/Login';
 import Dashboard from './views/Dashboard';
 import axios from 'axios';
+import Income from './views/Income';
 
 const getTransationsFromStorage = () => {
   const saved = localStorage.getItem("transaction");
@@ -206,6 +207,14 @@ function App() {
           deleteTransaction={deleteTransaction}
           refreshTransactions={refreshTransactions}
         />
+
+        <Route path='/income' element={<Income 
+        transation={transation}
+          addTransaction={addTransaction}
+          editTransaction={editTransaction}
+          deleteTransaction={deleteTransaction}
+          refreshTransactions={refreshTransactions}
+        />} />
       </Route>
     </Routes>
   );
