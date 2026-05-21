@@ -7,6 +7,7 @@ import Login from './views/Login';
 import Dashboard from './views/Dashboard';
 import axios from 'axios';
 import Income from './views/Income';
+import Expense from './views/Expense';
 
 const getTransationsFromStorage = () => {
   const saved = localStorage.getItem("transaction");
@@ -208,8 +209,16 @@ function App() {
           refreshTransactions={refreshTransactions}
         />
 
-        <Route path='/income' element={<Income 
-        transation={transation}
+        <Route path='/income' element={<Income
+          transation={transation}
+          addTransaction={addTransaction}
+          editTransaction={editTransaction}
+          deleteTransaction={deleteTransaction}
+          refreshTransactions={refreshTransactions}
+        />} />
+
+        <Route path='/expense' element={<Expense
+          transation={transation}
           addTransaction={addTransaction}
           editTransaction={editTransaction}
           deleteTransaction={deleteTransaction}
