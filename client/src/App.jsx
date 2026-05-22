@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router';
+import { Navigate, useLocation, useNavigate } from 'react-router';
 import { Routes, Route } from "react-router";
 import Layout from './components/Layout';
 import Signup from './views/Signup';
@@ -8,6 +8,7 @@ import Dashboard from './views/Dashboard';
 import axios from 'axios';
 import Income from './views/Income';
 import Expense from './views/Expense';
+import Profile from './views/Profile';
 
 const getTransationsFromStorage = () => {
   const saved = localStorage.getItem("transaction");
@@ -224,7 +225,16 @@ function App() {
           deleteTransaction={deleteTransaction}
           refreshTransactions={refreshTransactions}
         />} />
+
+        <Route path='/profile' element={
+          <Profile user={user}
+          onUpdateProfile={updatedUserData}
+          onLogout={handleLogout}
+          />
+        } />
       </Route>
+
+      <Route path='*' element={<Navigate to={user ? "/" : "/login"} />} />
     </Routes>
   );
 }

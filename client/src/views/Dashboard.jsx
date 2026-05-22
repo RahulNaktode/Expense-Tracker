@@ -137,7 +137,6 @@ function Dashboard() {
   }, [prevTimeFrameData, displayExpenses]);
 
   const financialOverviewData = useMemo(() => {
-  // ✅ Pehle server data check karo (kisi bhi timeFrame ke liye)
   if (
     overviewMeta.expenseDistribution &&
     Array.isArray(overviewMeta.expenseDistribution) &&
@@ -149,7 +148,6 @@ function Dashboard() {
     }));
   }
 
-  // ✅ Fallback — local transactions se calculate karo
   const categories = {};
   filteredTransactions.forEach((transaction) => {
     if (transaction.type === "expense") {
@@ -162,7 +160,7 @@ function Dashboard() {
     name: category,
     value: Math.round(categories[category]),
   }));
-}, [filteredTransactions, overviewMeta]); // ✅ timeFrame dependency hatayi
+}, [filteredTransactions, overviewMeta]); 
 
   const serverRecent = overviewMeta.recentTransactions || [];
   const serverRecentIncome = serverRecent
@@ -560,7 +558,6 @@ function Dashboard() {
           </div>
         </div>
 
-        {/* Expense Column */}
         <div className={dashboardStyles.listContainer}>
           <div className={dashboardStyles.listHeader}>
             <h3 className="text-lg md:text-xl lg:text-xl xl:text-xl font-bold text-gray-800 md:mt-3 mt-3 flex items-center gap-3">
