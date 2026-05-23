@@ -115,7 +115,7 @@ function App() {
 
         if (storedToken) {
           try {
-            const response = await axios.get("http://localhost:8000/user/me", {
+            const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/user/me`, {
               headers: { Authorization: `Bearer ${storedToken}` }
             })
             const profile = response.data;

@@ -205,7 +205,7 @@ function Dashboard() {
   const fetchDashboardOverview = async () => {
     try {
       setLoading(true);
-      const response = await axios.get("http://localhost:8000/dashboard", {
+      const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/dashboard`, {
         headers: getAuthHeader(),
         params: { timeFrame },
       })
@@ -305,11 +305,11 @@ function Dashboard() {
     try {
       setLoading(true);
       if (newTransaction.type === "income") {
-        await axios.post("http://localhost:8000/income/add", payload, {
+        await axios.post(`${import.meta.env.VITE_API_BASE_URL}/income/add`, payload, {
           headers: getAuthHeader(),
         })
       } else {
-        await axios.post("http://localhost:8000/expense/add", payload, {
+        await axios.post(`${import.meta.env.VITE_API_BASE_URL}/expense/add`, payload, {
           headers: getAuthHeader(),
         })
       }

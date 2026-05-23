@@ -92,7 +92,7 @@ const Expense = () => {
 
     const fetchOverview = useCallback(async (range = timeFrame ?? "monthly") => {
         try {
-            const res = await axios.get(`http://localhost:8000/expense/overview`, {
+            const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/expense/overview`, {
                 headers: getAuthHeaders(),
                 params: { range },
             });
@@ -213,7 +213,7 @@ const Expense = () => {
             setLoading(true);
             const config = {
                 method,
-                url: `http://localhost:8000${url}`,
+                url: `${import.meta.env.VITE_API_BASE_URL}${url}`,
                 headers: { "Content-Type": "application/json", ...getAuthHeaders() },
             };
 
@@ -293,7 +293,7 @@ const Expense = () => {
 
     const handleExport = async () => {
         try {
-            const res = await axios.get(`http://localhost:8000/expense/downloadexcel`, {
+            const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/expense/downloadexcel`, {
                 headers: getAuthHeaders(),
                 responseType: "blob",
             });

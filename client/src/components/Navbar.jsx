@@ -21,7 +21,7 @@ function Navbar({ user: propUser, onLogout }) {
             const token = localStorage.getItem("token");
             if (!token) return;
             try {
-                const response = await axios.get("http://localhost:8000/user/get", {
+                const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/user/get`, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
                 setUser(response.data);

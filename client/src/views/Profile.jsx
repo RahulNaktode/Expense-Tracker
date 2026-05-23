@@ -106,7 +106,7 @@ function Profile({ onUpdateProfile, onLogout }) {
 
         const config = {
           method,
-          url: `http://localhost:8000${endPoint}`,
+          url: `${import.meta.env.VITE_API_BASE_URL}${endPoint}`,
           headers: {
             Authorization: `Bearer ${token}`,
           },

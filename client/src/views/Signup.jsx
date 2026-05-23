@@ -30,7 +30,7 @@ function Signup() {
         setErrors({});
 
         try {
-            const response = await axios.post("http://localhost:8000/user/signup", userSignup);
+            const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/user/signup`, userSignup);
 
             if (response.data.success) {
                 toast.success(response.data.message, { id: "signupSuccess" });

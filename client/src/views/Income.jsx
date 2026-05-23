@@ -283,7 +283,7 @@ const Income = () => {
   const fetchOverview = useCallback(
     async (range = timeFrame ?? "monthly") => {
       try {
-        const res = await axios.get(`http://localhost:8000/income/overview`, {
+        const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/income/overview`, {
           headers: getAuthHeaders(),
           params: { range },
         });
@@ -352,7 +352,7 @@ const Income = () => {
         date: toIsoWithClientTime(newTransaction.date),
       };
 
-      await axios.post(`http://localhost:8000/income/add`, payload, {
+      await axios.post(`${import.meta.env.VITE_API_BASE_URL}/income/add`, payload, {
         headers: { "Content-Type": "application/json", ...getAuthHeaders() },
       });
       await refreshTransactions();
@@ -394,7 +394,7 @@ const Income = () => {
         date: toIsoWithClientTime(editForm.date),
       };
 
-      await axios.put(`http://localhost:8000/income/update/${editingId}`, payload, {
+      await axios.put(`${import.meta.env.VITE_API_BASE_URL}/income/update/${editingId}`, payload, {
         headers: { "Content-Type": "application/json", ...getAuthHeaders() },
       });
 
@@ -426,7 +426,7 @@ const Income = () => {
 
       try {
         setLoading(true);
-        await axios.delete(`http://localhost:8000/income/delete/${id}`, {
+        await axios.delete(`${import.meta.env.VITE_API_BASE_URL}/income/delete/${id}`, {
           headers: getAuthHeaders(),
         });
 
@@ -445,7 +445,7 @@ const Income = () => {
 
   const handleExport = useCallback(async () => {
     try {
-      const res = await axios.get(`http://localhost:8000/income/downloadexcel`, {
+      const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/income/downloadexcel`, {
         headers: getAuthHeaders(),
         responseType: "blob",
       });

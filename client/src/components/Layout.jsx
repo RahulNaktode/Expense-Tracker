@@ -70,8 +70,8 @@ function Layout({ onLogout, user }) {
             const headers = token ? { Authorization: `Bearer ${token}` } : {};
 
             const [incomeRes, expenseRes] = await Promise.all([
-                axios.get(`http://localhost:8000/income/get`, { headers }),
-                axios.get(`http://localhost:8000/expense/get`, { headers }),
+                axios.get(`${import.meta.env.VITE_API_BASE_URL}/income/get`, { headers }),
+                axios.get(`${import.meta.env.VITE_API_BASE_URL}/expense/get`, { headers }),
             ]);
 
             const incomes = safeArrayFromResponse(incomeRes).map((i) => ({
@@ -112,7 +112,7 @@ function Layout({ onLogout, user }) {
             const token = localStorage.getItem("token");
             const headers = token ? { Authorization: `Bearer ${token}` } : {};
             const endpoint = transaction.type === "income" ? "income/add" : "expense/add";
-            await axios.post(`http://localhost:8000/${endpoint}`, transaction, { headers });
+            await axios.post(`${import.meta.env.VITE_API_BASE_URL}/${endpoint}`, transaction, { headers });
             await fetchTransactions();
             return true;
         } catch (err) {
@@ -126,7 +126,7 @@ function Layout({ onLogout, user }) {
             const token = localStorage.getItem("token");
             const headers = token ? { Authorization: `Bearer ${token}` } : {};
             const endpoint = transaction.type === "income" ? "income/update" : "expense/update";
-            await axios.put(`http://localhost:8000/${endpoint}/${id}`, transaction, { headers });
+            await axios.put(`${import.meta.env.VITE_API_BASE_URL}/${endpoint}/${id}`, transaction, { headers });
             await fetchTransactions();
             return true;
         } catch (err) {
@@ -140,7 +140,7 @@ function Layout({ onLogout, user }) {
             const token = localStorage.getItem("token");
             const headers = token ? { Authorization: `Bearer ${token}` } : {};
             const endpoint = type === "income" ? "income/delete" : "expense/delete";
-            await axios.delete(`http://localhost:8000/${endpoint}/${id}`, { headers });
+            await axios.delete(`${import.meta.env.VITE_API_BASE_URL}/${endpoint}/${id}`, { headers });
             await fetchTransactions();
             return true;
         } catch (err) {
