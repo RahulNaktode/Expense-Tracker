@@ -394,7 +394,7 @@ const Income = () => {
         date: toIsoWithClientTime(editForm.date),
       };
 
-      await axios.put(`${API_BASE}/income/update/${editingId}`, payload, {
+      await axios.put(`http://localhost:8000/income/update/${editingId}`, payload, {
         headers: { "Content-Type": "application/json", ...getAuthHeaders() },
       });
 
@@ -426,7 +426,7 @@ const Income = () => {
 
       try {
         setLoading(true);
-        await axios.delete(`${API_BASE}/income/delete/${id}`, {
+        await axios.delete(`http://localhost:8000/income/delete/${id}`, {
           headers: getAuthHeaders(),
         });
 
@@ -445,7 +445,7 @@ const Income = () => {
 
   const handleExport = useCallback(async () => {
     try {
-      const res = await axios.get(`${API_BASE}/income/downloadexcel`, {
+      const res = await axios.get(`http://localhost:8000/income/downloadexcel`, {
         headers: getAuthHeaders(),
         responseType: "blob",
       });

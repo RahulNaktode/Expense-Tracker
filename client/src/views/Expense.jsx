@@ -77,7 +77,7 @@ const Expense = () => {
         type: "expense",
         category: "Food",
     });
-    const [setOverview] = useState({
+    const [overview, setOverview] = useState({
         totalExpense: 0,
         averageExpense: 0,
         numberOfTransactions: 0,
@@ -213,7 +213,7 @@ const Expense = () => {
             setLoading(true);
             const config = {
                 method,
-                url: `http://localhost:8000/${url}`,
+                url: `http://localhost:8000${url}`,
                 headers: { "Content-Type": "application/json", ...getAuthHeaders() },
             };
 
