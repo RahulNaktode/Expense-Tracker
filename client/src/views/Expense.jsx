@@ -29,6 +29,7 @@ import AddTransactionModal from "../components/Add";
 import { getTimeFrameRange, generateChartPoints } from "../components/Helpers";
 import { CATEGORY_ICONS } from "../assets/color";
 import { expensePageStyles as styles } from "../assets/dummyStyles";
+import toast, { Toaster } from "react-hot-toast";
 
 
 function toIsoWithClientTime(dateValue) {
@@ -227,7 +228,7 @@ const Expense = () => {
         } catch (err) {
             console.error(`${method} request error:`, err);
             const serverMsg = err?.response?.data?.message;
-            alert(serverMsg || `Server error while ${method === 'post' ? 'adding' : method === 'put' ? 'updating' : 'deleting'} expense.`);
+            toast.error(serverMsg || `Server error while ${method === 'post' ? 'adding' : method === 'put' ? 'updating' : 'deleting'} expense.`);
             throw err;
         } finally {
             setLoading(false);
@@ -328,7 +329,7 @@ const Expense = () => {
                 exportToExcel(exportData, `expenses_${new Date().toISOString().slice(0, 10)}`);
             } catch (e) {
                 console.error("Fallback export failed:", e);
-                alert("Failed to export data.");
+                toast.error("Failed to export data.");
             }
         }
     };
@@ -588,6 +589,8 @@ const Expense = () => {
                 ]}
                 color="orange"
             />
+
+            <Toaster />
         </div>
     );
 };

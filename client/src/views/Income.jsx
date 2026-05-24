@@ -30,7 +30,7 @@ import FinancialCard from "../components/FinancialCard";
 import { getTimeFrameRange, generateChartPoints } from "../components/Helpers";
 import { INCOME_COLORS, CATEGORY_ICONS_Inc } from "../assets/color";
 import { incomeStyles as styles } from "../assets/dummyStyles";
-import { Toaster } from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 
 
 function toIsoWithClientTime(dateValue) {
@@ -369,7 +369,7 @@ const Income = () => {
     } catch (err) {
       console.error("Add income error:", err);
       const serverMsg = err?.response?.data?.message;
-      alert(serverMsg || "Server error while adding income.");
+      toast.error(serverMsg || "Server error while adding income.");
     } finally {
       setLoading(false);
     }
@@ -405,7 +405,7 @@ const Income = () => {
     } catch (err) {
       console.error("Update income error:", err);
       const serverMsg = err?.response?.data?.message;
-      alert(serverMsg || "Server error while updating income.");
+      toast.error(serverMsg || "Server error while updating income.");
     } finally {
       setLoading(false);
     }
@@ -435,7 +435,7 @@ const Income = () => {
       } catch (err) {
         console.error("Delete income error:", err);
         const serverMsg = err?.response?.data?.message;
-        alert(serverMsg || "Server error while deleting income.");
+        toast.error(serverMsg || "Server error while deleting income.");
       } finally {
         setLoading(false);
       }
@@ -481,7 +481,7 @@ const Income = () => {
         );
       } catch (e) {
         console.error("Fallback export failed:", e);
-        alert("Failed to export data.");
+        toast.error("Failed to export data.");
       }
     }
   }, [getAuthHeaders, filteredTransactions]);
