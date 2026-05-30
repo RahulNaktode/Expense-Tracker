@@ -8,6 +8,7 @@ import userRouter from './routes/user.js';
 import expenseRouter from './routes/expense.js';
 import incomeRouter from './routes/income.js';
 import dashboardRouter from './routes/dashboard.js';
+import aiRoutes from './routes/ai.js';
 
 dotenv.config();
 
@@ -26,6 +27,7 @@ app.use("/user", userRouter);
 app.use("/income", incomeRouter);
 app.use("/expense", expenseRouter);
 app.use("/dashboard", checkJWT, dashboardRouter);
+app.use("/ai", aiRoutes);
 
 
 app.listen(PORT, (req, res) => {
