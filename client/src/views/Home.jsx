@@ -1,0 +1,165 @@
+import React from 'react';
+import { 
+  Wallet, 
+  User, 
+  UserCheck, 
+  PlusCircle, 
+  BarChart3, 
+  CalendarDays, 
+  Download, 
+  ArrowRight, 
+  TrendingUp, 
+  Sparkles 
+} from 'lucide-react';
+import Navbar from '../components/Navbar';
+
+const LandingHome = () => {
+  const coreFeatures = [
+
+    {
+      title: "Comprehensive User Profile",
+      desc: "Access a dedicated profile view containing account specific metrics, configurations, registration details, and security parameters in one central hub.",
+      icon: <User size={24} />,
+      iconBg: "bg-indigo-100 text-indigo-600"
+    },
+    {
+      title: "Update Profile Functionality",
+      desc: "Effortlessly update personal details, update credentials, change system settings, or adjust access criteria with instantaneous record synchronization.",
+      icon: <UserCheck size={24} />,
+      iconBg: "bg-purple-100 text-purple-600"
+    },
+    {
+      title: "Add & Manage Transactions",
+      desc: "Seamlessly log incoming revenue streams and operational costs. Real-time categorization and custom tagging remove structural bookkeeping friction.",
+      icon: <PlusCircle size={24} />,
+      iconBg: "bg-emerald-100 text-emerald-600"
+    },
+    {
+      title: "Dashboard Overview",
+      desc: "Provides a high-level analytics viewport computing total balances, monthly incoming streams, and aggregated outgoing distributions instantly upon access.",
+      icon: <BarChart3 size={24} />,
+      iconBg: "bg-amber-100 text-amber-600"
+    },
+    {
+      title: "Monthly Tracking & Analytics",
+      desc: "Organizes history into granular monthly reports, providing structural financial visibility to identify key saving avenues and spending anomalies.",
+      icon: <CalendarDays size={24} />,
+      iconBg: "bg-rose-100 text-rose-600"
+    },
+    {
+      title: "Excel Data Export (.xlsx)",
+      desc: "Provides clean tabular asset output. Export comprehensive transaction databases directly into professional Excel format with one click.",
+      icon: <Download size={24} />,
+      iconBg: "bg-teal-100 text-teal-600"
+    }
+  ];
+
+  return (
+    <div className="min-h-screen bg-slate-50 text-slate-800 antialiased font-sans">
+      
+      <Navbar />
+
+      {/* 2. Hero Section */}
+      <header className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-20 text-center lg:text-left lg:flex lg:items-center lg:gap-12">
+        <div className="lg:w-1/2 space-y-6">
+          <div className="inline-flex items-center gap-2 bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-xs font-semibold">
+            <Sparkles size={14} /> Comprehensive Fiscal Utility
+          </div>
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight">
+            Track Your Expenses. <span className="text-blue-600">Save Your Money.</span>
+          </h1>
+          <p className="text-lg text-slate-600 max-w-xl mx-auto lg:mx-0">
+            A secure architecture designed to map financial pipelines, manage complex budgets, and establish absolute structural transparency over cash flow metrics.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+            <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-4 rounded-xl transition shadow-lg shadow-blue-200 flex items-center justify-center gap-2 group">
+              Initialize Dashboard <ArrowRight size={18} className="group-hover:translate-x-1 transition" />
+            </button>
+          </div>
+        </div>
+
+        {/* Dashboard Preview Interface Mock */}
+        <div className="lg:w-2/3 mt-12 lg:mt-0">
+          <div className="bg-gradient-to-tr from-blue-600 to-indigo-600 p-4 rounded-3xl shadow-2xl">
+            <div className="bg-white rounded-2xl p-6 shadow-inner space-y-6">
+              <div className="flex justify-between items-center border-b pb-4">
+                <div>
+                  <p className="text-xs text-slate-400 font-medium">Net Available Balance</p>
+                  <p className="text-2xl font-bold text-slate-800">$4,520.00</p>
+                </div>
+                <span className="bg-green-100 text-green-700 text-xs px-2.5 py-1 rounded-full font-bold flex items-center gap-1">
+                  <TrendingUp size={14} /> +12.4% Performance
+                </span>
+              </div>
+              <div className="space-y-3">
+                <div className="flex justify-between items-center p-3 bg-slate-50 rounded-xl">
+                  <span className="text-sm font-medium">Operational Expenses</span>
+                  <span className="font-semibold text-red-500">-$1,200.00</span>
+                </div>
+                <div className="flex justify-between items-center p-3 bg-slate-50 rounded-xl">
+                  <span className="text-sm font-medium">Verified Allocations</span>
+                  <span className="font-semibold text-green-500">+$6,000.00</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      {/* 3. Core Capabilities Section */}
+      <section className="bg-white py-20 border-y border-slate-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
+            <h2 className="text-3xl font-bold text-slate-900 sm:text-4xl">
+              Enterprise Grade Asset Management Features
+            </h2>
+            <p className="text-slate-500">
+              A comprehensive system built around precision logging, structured balance assessments, and zero operational overhead.
+            </p>
+          </div>
+
+          {/* Features Layout Array Mapping */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {coreFeatures.map((feature, index) => (
+              <div 
+                key={index} 
+                className="p-6 bg-slate-50 rounded-2xl hover:shadow-md transition duration-200 flex flex-col justify-between border border-slate-100/80"
+              >
+                <div className="space-y-4">
+                  <div className={`p-3 rounded-xl w-fit ${feature.iconBg}`}>
+                    {feature.icon}
+                  </div>
+                  <h3 className="text-xl font-bold text-slate-900">{feature.title}</h3>
+                  <p className="text-slate-600 text-sm leading-relaxed">
+                    {feature.desc}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 4. Footer */}
+     <footer className="border-t border-gray-200 bg-white fixed bottom-0 left-0 right-0 z-50 shadow-md">
+        <div className="max-w-md mx-auto px-4 py-3 flex items-center justify-around text-xs font-semibold text-gray-600">
+          <button onClick={() => navigate('/')} className="text-teal-600 flex flex-col items-center gap-0.5">
+            <span>🏠 Home</span>
+          </button>
+          <button onClick={() => navigate('/dashboard')} className="hover:text-teal-600 transition-colors flex flex-col items-center gap-0.5">
+            <span>📊 Dashboard</span>
+          </button>
+          <button onClick={() => navigate('/transactions')} className="hover:text-teal-600 transition-colors flex flex-col items-center gap-0.5">
+            <span>💸 Ledger</span>
+          </button>
+          <button onClick={() => navigate('/profile')} className="hover:text-teal-600 transition-colors flex flex-col items-center gap-0.5">
+            <span>👤 Profile</span>
+          </button>
+        </div>
+      </footer>
+
+    </div>
+  );
+};
+
+export default LandingHome;

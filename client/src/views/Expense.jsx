@@ -31,7 +31,6 @@ import { CATEGORY_ICONS } from "../assets/color";
 import { expensePageStyles as styles } from "../assets/dummyStyles";
 import toast, { Toaster } from "react-hot-toast";
 
-
 function toIsoWithClientTime(dateValue) {
     if (!dateValue) {
         return new Date().toISOString();
@@ -85,6 +84,10 @@ const Expense = () => {
         recentTransactions: [],
         range: "monthly",
     });
+
+    const [inputText, setInputText] = useState("");
+    const [parsedData, setParsedData] = useState(null);
+    const [message, setMessage] = useState("");
 
     const getAuthHeaders = useCallback(() => {
         const token = localStorage.getItem("token");
@@ -333,7 +336,6 @@ const Expense = () => {
             }
         }
     };
-
 
     return (
         <div className={styles.container}>

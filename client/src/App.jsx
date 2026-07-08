@@ -9,6 +9,7 @@ import axios from 'axios';
 import Income from './views/Income';
 import Expense from './views/Expense';
 import Profile from './views/Profile';
+import Home from './views/Home';
 
 const getTransationsFromStorage = () => {
   const saved = localStorage.getItem("transaction");
@@ -187,6 +188,7 @@ function App() {
 
   return (
     <Routes>
+      <Route path="/home" element={<Home to="/" />} />
       <Route path="/login" element={<Login onLogin={handleLogin} />} />
       <Route path="/signup" element={<Signup onSignup={handleSignup} />} />
 
