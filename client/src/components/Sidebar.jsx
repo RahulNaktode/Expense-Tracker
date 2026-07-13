@@ -5,7 +5,7 @@ import { Home, ArrowUp, ArrowDown, User, HelpCircle, LogOut, X, Menu } from 'luc
 import { AnimatePresence, motion } from "framer-motion"; // Removed non-existent 'scale' import
 
 const MENU_ITEMS = [
-    { text: "Dashboard", path: "/", icon: <Home size={20} /> },
+    { text: "Dashboard", path: "/dashboard", icon: <Home size={20} /> },
     { text: "Income", path: "/income", icon: <ArrowUp size={20} /> },
     { text: "Expenses", path: "/expense", icon: <ArrowDown size={20} /> },
     { text: "Profile", path: "/profile", icon: <User size={20} /> },

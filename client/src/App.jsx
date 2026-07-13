@@ -188,8 +188,8 @@ function App() {
 
   return (
     <Routes>
-      <Route path="/home" element={<Home to="/" />} />
-      <Route path="/login" element={<Login onLogin={handleLogin} />} />
+      <Route path="/home" element={<Home />} />
+      <Route path="/" element={<Login onLogin={handleLogin} />} />
       <Route path="/signup" element={<Signup onSignup={handleSignup} />} />
 
       <Route element={
@@ -204,7 +204,7 @@ function App() {
         />
       }
       >
-        <Route path='/' element={<Dashboard />}
+        <Route path='/dashboard' element={<Dashboard />}
           transation={transation}
           addTransaction={addTransaction}
           editTransaction={editTransaction}

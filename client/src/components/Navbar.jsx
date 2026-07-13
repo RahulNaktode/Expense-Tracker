@@ -4,6 +4,7 @@ import ImgLogo from "../assets/logo.png";
 import { useNavigate } from 'react-router'
 import { ChevronDown, LogOut, User } from 'lucide-react';
 import axios from 'axios';
+import { Link } from 'react-router';
 
 function Navbar({ user: propUser, onLogout }) {
     const navigate = useNavigate();
@@ -54,11 +55,19 @@ function Navbar({ user: propUser, onLogout }) {
     return (
         <header className={navbarStyles.header}>
             <div className={navbarStyles.container}>
-                <div onClick={() => navigate("/")} className={navbarStyles.logoContainer}>
+                <div onClick={() => navigate("/home")} className={navbarStyles.logoContainer}>
                     <div className={navbarStyles.logoImage}>
                         <img src={ImgLogo} alt="Logo" />
                     </div>
                     <span className={navbarStyles.logoText}>Expense Tracker</span>
+                </div>
+
+
+               <div className="flex items-center gap-4">
+                <div className={navbarStyles.navLinksContainer}>
+                    <Link to="/home" className={navbarStyles.navLink}>
+                        Home
+                    </Link>
                 </div>
 
                 {user && (
@@ -123,6 +132,7 @@ function Navbar({ user: propUser, onLogout }) {
                         )}
                     </div>
                 )}
+                </div>
             </div>
         </header>
     )
