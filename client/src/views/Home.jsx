@@ -8,6 +8,7 @@ import {
 import Features from '../components/Features.jsx';
 import { Link, useNavigate, useOutletContext } from 'react-router';
 import Navbar from '../components/Navbar.jsx';
+import Footer from '../components/Footer.jsx';
 
 const Homepage = ({ onLogout, user }) => {
   
@@ -62,23 +63,7 @@ const Homepage = ({ onLogout, user }) => {
 
       <Features />
 
-      {/* 4. Footer */}
-     <footer className="border-t border-gray-200 bg-white fixed bottom-0 left-0 right-0 z-50 shadow-md">
-        <div className="max-w-md mx-auto px-4 py-3 flex items-center justify-around text-xs font-semibold text-gray-600">
-          <button onClick={() => navigate('/')} className="text-teal-600 flex flex-col items-center gap-0.5">
-            <span>🏠 Home</span>
-          </button>
-          <button onClick={() => navigate('/dashboard')} className="hover:text-teal-600 transition-colors flex flex-col items-center gap-0.5">
-            <span>📊 Dashboard</span>
-          </button>
-          <button onClick={() => navigate('/transactions')} className="hover:text-teal-600 transition-colors flex flex-col items-center gap-0.5">
-            <span>💸 Ledger</span>
-          </button>
-          <button onClick={() => navigate('/profile')} className="hover:text-teal-600 transition-colors flex flex-col items-center gap-0.5">
-            <span>👤 Profile</span>
-          </button>
-        </div>
-      </footer>
+      <Footer />
 
     </div>
   );
