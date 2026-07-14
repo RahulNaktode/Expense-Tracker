@@ -63,9 +63,9 @@ function Navbar({ user: propUser, onLogout }) {
                 </div>
 
 
-               <div className="flex items-center gap-4">
-                <div className={navbarStyles.navLinksContainer}>
-                    <Link to="/home" className={navbarStyles.navLink}>
+               <div className="flex items-center gap-5">
+                <div className="hover:bg-gray-50 transition-colors hover:rounded-lg px-3 py-2">
+                    <Link to="/home" className=":text-teal-500 hover:text-grey-700 transition-colors">
                         Home
                     </Link>
                 </div>

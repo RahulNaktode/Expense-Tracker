@@ -1,11 +1,11 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { useLocation, useNavigate, Link } from 'react-router'; // Consolidated imports
 import { cn, sidebarStyles } from '../assets/dummyStyles';
-import { Home, ArrowUp, ArrowDown, User, HelpCircle, LogOut, X, Menu } from 'lucide-react';
+import { BarChart3, ArrowUp, ArrowDown, User, HelpCircle, LogOut, X, Menu } from 'lucide-react';
 import { AnimatePresence, motion } from "framer-motion"; // Removed non-existent 'scale' import
 
 const MENU_ITEMS = [
-    { text: "Dashboard", path: "/dashboard", icon: <Home size={20} /> },
+    { text: "Dashboard", path: "/dashboard", icon: <BarChart3 size={20} /> },
     { text: "Income", path: "/income", icon: <ArrowUp size={20} /> },
     { text: "Expenses", path: "/expense", icon: <ArrowDown size={20} /> },
     { text: "Profile", path: "/profile", icon: <User size={20} /> },

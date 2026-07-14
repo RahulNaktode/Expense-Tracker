@@ -188,7 +188,7 @@ function App() {
 
   return (
     <Routes>
-      <Route path="/home" element={<Home />} />
+      <Route path="/home" element={<Home onLogin={handleLogin} onLogout={handleLogout} user={user} />} />
       <Route path="/" element={<Login onLogin={handleLogin} />} />
       <Route path="/signup" element={<Signup onSignup={handleSignup} />} />
 
