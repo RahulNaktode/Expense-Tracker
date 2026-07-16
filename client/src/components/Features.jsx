@@ -46,7 +46,7 @@ function Features() {
         <section className="bg-white py-20 border-y border-slate-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-            <h2 className="text-3xl font-bold text-slate-900 sm:text-4xl">
+            <h2 className="text-3xl font-bold bg-gradient-to-r from-slate-700 to-cyan-600 bg-clip-text text-transparent sm:text-4xl">
               Enterprise Grade Asset Management Features
             </h2>
             <p className="text-slate-500">
@@ -59,7 +59,7 @@ function Features() {
             {coreFeatures.map((feature, index) => (
               <div 
                 key={index} 
-                className="p-6 bg-slate-50 rounded-2xl hover:shadow-md transition duration-200 flex flex-col justify-between border border-slate-100/80"
+                className="p-6 bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between"
               >
                 <div className="space-y-4">
                   <div className={`p-3 rounded-xl w-fit ${feature.iconBg}`}>
