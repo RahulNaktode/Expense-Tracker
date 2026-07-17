@@ -39,7 +39,7 @@ function Navbar({ user: propUser, onLogout }) {
         setMenuOpen(false);
         localStorage.removeItem("token");
         onLogout?.();
-        navigate("/login");
+        navigate("/");
     }
 
     useEffect(() => {
