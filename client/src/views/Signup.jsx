@@ -37,7 +37,7 @@ function Signup() {
                 setUserSignup({ name: "", email: "", password: "" });
 
                 setTimeout(() => {
-                    navigate("/login");
+                    navigate("/");
                 }, 1000);
             } else {
                 toast.error(response.data.message || "Signup failed");
