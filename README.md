@@ -10,7 +10,7 @@ https://expense-tracker-j6np.onrender.com/
 ---
 
 ## Pages
-- About
+- Home
 - SignUp & Login
 - Dashboard
 - Expense
@@ -39,3 +39,19 @@ https://expense-tracker-j6np.onrender.com/
 - **Tools**: Git, GitHub, Postman, Vite
 
 ---
+
+## Home Page
+![Home Page](./client/src/assets/homepage.png)
+
+---
+
+
+## Dashboard
+![Dashboard](./client/src/assets/dashboardpage.png)
+
+---
+
+
+## Project Structure
+
+![Project Structure](./client/src/assets/projectStructure.png)
